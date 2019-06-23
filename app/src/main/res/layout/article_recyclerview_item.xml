@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_4"
+    app:cardCornerRadius="@dimen/dp_16">
+
+    <RelativeLayout
+        android:id="@+id/article_cardview_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_8">
+
+        <ImageView
+            android:id="@+id/article_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/article_image"
+            android:padding="@dimen/dp_4"
+            android:text="Title"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:padding="@dimen/dp_4"
+            android:text="Description :" />
+
+        <TextView
+            android:id="@+id/published_at_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description"
+            android:padding="4dp"
+            android:text="Published At : " />
+
+        <TextView
+            android:id="@+id/published_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description"
+            android:layout_toEndOf="@id/published_at_header"
+            android:padding="4dp"
+            android:text="Published At text" />
+
+        <TextView
+            android:id="@+id/author_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/published_at_header"
+            android:layout_toStartOf="@id/author"
+            android:padding="4dp"
+            android:text="Author : " />
+
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/published_at_header"
+            android:layout_alignParentEnd="true"
+            android:padding="4dp"
+            android:text="Author text" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

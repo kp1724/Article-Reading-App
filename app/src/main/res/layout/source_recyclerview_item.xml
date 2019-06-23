@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_4"
+    app:cardCornerRadius="@dimen/dp_16">
+
+    <RelativeLayout
+        android:id="@+id/sources_cardview_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/dp_8">
+
+        <TextView
+            android:id="@+id/source_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_4"
+            android:text="Source Name"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/source_name"
+            android:padding="@dimen/dp_4"
+            android:text="Description :" />
+
+        <TextView
+            android:id="@+id/category_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description"
+            android:padding="4dp"
+            android:text="Category : " />
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description"
+            android:layout_toEndOf="@id/category_header"
+            android:padding="4dp"
+            android:text="Category text" />
+
+        <TextView
+            android:id="@+id/country_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category_header"
+            android:padding="4dp"
+            android:text="Country : " />
+
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category"
+            android:layout_toEndOf="@id/country_header"
+            android:padding="4dp"
+            android:text="Country text" />
+
+        <TextView
+            android:id="@+id/language_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category_header"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_toEndOf="@id/country"
+            android:padding="4dp"
+            android:text="Language : " />
+
+        <TextView
+            android:id="@+id/language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/category"
+            android:layout_toEndOf="@id/language_header"
+            android:padding="4dp"
+            android:text="Country text" />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
