@@ -1,10 +1,12 @@
 package com.example.miniproject.Repository;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
+import com.example.miniproject.BuildConfig;
 import com.example.miniproject.Database.Controller.DatabaseController;
 import com.example.miniproject.Model.AbstractResponse;
 import com.example.miniproject.Model.SourceModel;
@@ -13,7 +15,6 @@ import com.example.miniproject.RetrofitService.ServiceClient;
 import com.example.miniproject.Utils.AppExecutors;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -54,7 +55,7 @@ public class SourceRepository {
 
             @Override
             public void onFailure(Call<AbstractResponse> call, Throwable t) {
-                Log.d(TAG, "onFailure: " + t);
+                t.printStackTrace();
             }
         });
     }

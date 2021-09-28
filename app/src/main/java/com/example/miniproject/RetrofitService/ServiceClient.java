@@ -11,7 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface ServiceClient {
-    String baseUrl = "https://newsapi.org/";
+    String baseUrl = "https://newsapi.org";
 
     @GET("/v2/sources")
     Call<AbstractResponse> getSourcesList(/*@Query("apiKey") String apiKey*/);

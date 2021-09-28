@@ -1,19 +1,20 @@
 package com.example.miniproject.Activities;
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.miniproject.Adapters.SourceRecyclerViewAdapter;
 import com.example.miniproject.Model.ArticleModel;
@@ -24,7 +25,6 @@ import com.example.miniproject.fragments.ArticleFragment;
 
 import java.util.List;
 
-//721664efb3a14546896cda74ecd38ff0
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Context mContext;
     private ProgressBar progressBar;

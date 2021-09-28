@@ -1,14 +1,10 @@
 package com.example.miniproject.Repository;
 
-import android.app.Application;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
-
+import androidx.lifecycle.LiveData;
 import com.example.miniproject.Database.Controller.DatabaseController;
 import com.example.miniproject.Model.AbstractResponse;
 import com.example.miniproject.Model.ArticleModel;
-import com.example.miniproject.Model.SourceModel;
 import com.example.miniproject.RetrofitService.RetrofitController;
 import com.example.miniproject.RetrofitService.ServiceClient;
 import com.example.miniproject.Utils.AppExecutors;

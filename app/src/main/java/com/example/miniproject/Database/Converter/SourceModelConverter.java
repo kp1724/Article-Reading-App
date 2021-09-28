@@ -1,9 +1,8 @@
 package com.example.miniproject.Database.Converter;
 
-import android.arch.persistence.room.TypeConverter;
+import androidx.room.TypeConverter;
 
 import com.example.miniproject.Model.SourceModel;
-import com.example.miniproject.Repository.SourceRepository;
 
 public class SourceModelConverter {
     @TypeConverter

@@ -1,5 +1,7 @@
 package com.example.miniproject.RetrofitService;
 
+import android.util.Log;
+
 import com.example.miniproject.BuildConfig;
 
 import java.io.IOException;
@@ -12,7 +14,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitController {
-    private static final String API_BASE_URL = "https://newsapi.org/";
     private static Retrofit retrofit;
     private static final Object LOCK = new Object();
 
@@ -31,6 +32,7 @@ public class RetrofitController {
                         .addQueryParameter("apiKey", BuildConfig.NewsApiKey)
                         .build();
 
+                Log.d("Url", url.toString());
                 Request request = original.newBuilder()
                         .url(url).build();
                 return chain.proceed(request);

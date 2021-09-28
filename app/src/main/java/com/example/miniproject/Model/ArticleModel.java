@@ -1,10 +1,9 @@
 package com.example.miniproject.Model;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
@@ -13,7 +12,8 @@ public class ArticleModel implements Serializable {
     private SourceModel source;
     private String author;
     @PrimaryKey
-    @NonNull private String title;
+    @NonNull
+    private String title;
     private String description;
     private String url;
     @ColumnInfo(name = "url_to_image")

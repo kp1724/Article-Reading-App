@@ -1,12 +1,12 @@
 package com.example.miniproject.Database.Controller;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.util.Log;
+
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.example.miniproject.Database.Converter.DateConverter;
 import com.example.miniproject.Database.Converter.SourceModelConverter;
