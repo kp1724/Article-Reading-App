@@ -13,8 +13,8 @@
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.WebViewActivity" />
-        <activity android:name=".Activities.MainActivity"
+        <activity android:name=".activities.WebViewActivity" />
+        <activity android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
