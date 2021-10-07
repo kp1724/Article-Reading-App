@@ -1,32 +1,31 @@
 package com.example.miniproject.repository
 
-import android.content.Context
 import androidx.lifecycle.LiveData
-import com.example.miniproject.database.controller.DatabaseController.Companion.getInstance
+import com.example.miniproject.database.controller.DatabaseController
 import com.example.miniproject.model.AbstractResponse
 import com.example.miniproject.model.ArticleModel
-import com.example.miniproject.retrofitService.RetrofitController
 import com.example.miniproject.retrofitService.ServiceClient
 import com.example.miniproject.utils.AppExecutors
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class ArticleRepository constructor(private val context: Context) {
+class ArticleRepository @Inject constructor(
+    private val databaseController: DatabaseController,
+    private val serviceClient: ServiceClient
+) {
     fun getArticleListFromWebAndInsertInDB(sourceId: String?) {
-        val serviceClient: ServiceClient? = RetrofitController.instance?.create(
-            ServiceClient::class.java
-        )
-        serviceClient?.getArticlesList(sourceId)?.enqueue(object : Callback<AbstractResponse?> {
+        serviceClient.getArticlesList(sourceId)?.enqueue(object : Callback<AbstractResponse?> {
             override fun onResponse(
                 call: Call<AbstractResponse?>,
                 response: Response<AbstractResponse?>
             ) {
-                if (response.body() != null && (response.body()!!.status == "ok"))
+                if (response.body() != null && (response.body()?.status == "ok"))
                     AppExecutors.instance?.diskIO?.execute {
-                        getInstance(context)!!.articleDao()!!.deleteAllArticles()
-                        getInstance(context)!!.articleDao()!!
-                            .insertAllArticles(response.body()!!.articles)
+                        databaseController.articleDao().deleteAllArticles()
+                        databaseController.articleDao()
+                            .insertAllArticles(response.body()?.articles)
                     }
             }
 
@@ -34,9 +33,7 @@ class ArticleRepository constructor(private val context: Context) {
         })
     }
 
-    fun getArticleFromDb() = getInstance(context)!!.articleDao()!!.loadAllArticles()
-
     fun getArticleList(id: String?): LiveData<List<ArticleModel?>?>? {
-        return getInstance(context)!!.articleDao()!!.getArticle(id)
+        return databaseController.articleDao().getArticle(id)
     }
 }

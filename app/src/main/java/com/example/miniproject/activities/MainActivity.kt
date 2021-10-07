@@ -7,15 +7,22 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.miniproject.App
 import com.example.miniproject.R
 import com.example.miniproject.adapters.SourceRecyclerViewAdapter
+import com.example.miniproject.di.component.MainActivityComponent
+import com.example.miniproject.extension.KotlinExtension.ViewExtension.gone
+import com.example.miniproject.extension.KotlinExtension.ViewExtension.isVisible
+import com.example.miniproject.extension.KotlinExtension.ViewExtension.visible
 import com.example.miniproject.fragments.ArticleFragment
 import com.example.miniproject.model.ArticleModel
 import com.example.miniproject.model.SourceModel
+import com.example.miniproject.utils.ViewModelFactory
 import com.example.miniproject.viewModel.SourceViewModel
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var mContext: Context? = null
@@ -23,13 +30,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var fragmentContainer: FrameLayout? = null
     private var sourceRecyclerView: RecyclerView? = null
     private var sourceRecyclerViewAdapter: SourceRecyclerViewAdapter? = null
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    lateinit var appComponent: MainActivityComponent
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        appComponent = (application as App).appComponent.mainActivityComponent().create()
+        appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mContext = this
         initViews()
         if (savedInstanceState == null) {
-            sourceRecyclerViewAdapter = SourceRecyclerViewAdapter(mContext)
+            sourceRecyclerViewAdapter = SourceRecyclerViewAdapter(this)
             sourceRecyclerView?.layoutManager = LinearLayoutManager(mContext)
             sourceRecyclerView?.adapter = sourceRecyclerViewAdapter
             setUpSourcesList()
@@ -42,26 +57,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setUpViewModel() {
-        val sourceViewModel = SourceViewModel(application)
-        val sourceModelList = sourceViewModel.getSourceList()
-        sourceViewModel.callApiAndSaveInDB()
+        val viewModel = ViewModelProvider(this, viewModelFactory)[SourceViewModel::class.java]
+        viewModel.callApiAndSaveInDB()
+        val sourceModelList = viewModel.getSourceList()
         hideProgressBarAndShowSourceList()
-        sourceModelList?.observe((mContext as LifecycleOwner?)!!, { sourceModels ->
+        sourceModelList?.observe(this, { sourceModels ->
             sourceRecyclerViewAdapter?.setSourcesList(sourceModels)
             sourceRecyclerViewAdapter?.notifyDataSetChanged()
         })
     }
 
     private fun hideProgressBarAndShowSourceList() {
-        progressBar!!.visibility = View.GONE
-        sourceRecyclerView!!.visibility = View.VISIBLE
-        fragmentContainer!!.visibility = View.GONE
+        progressBar.gone()
+        sourceRecyclerView.visible()
+        fragmentContainer.gone()
     }
 
     private fun showProgressBar() {
-        progressBar!!.visibility = View.VISIBLE
-        sourceRecyclerView!!.visibility = View.GONE
-        fragmentContainer!!.visibility = View.GONE
+        progressBar.visible()
+        sourceRecyclerView.gone()
+        fragmentContainer.gone()
     }
 
     private fun initViews() {
@@ -99,14 +114,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showFragmentContainer() {
-        progressBar!!.visibility = View.GONE
-        sourceRecyclerView!!.visibility = View.GONE
-        fragmentContainer!!.visibility = View.VISIBLE
+        progressBar.gone()
+        sourceRecyclerView.gone()
+        fragmentContainer.visible()
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if (fragmentContainer!!.visibility == View.VISIBLE) {
+        if (fragmentContainer.isVisible()) {
             hideProgressBarAndShowSourceList()
             supportFragmentManager.popBackStack()
         } else finish()

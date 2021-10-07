@@ -4,4 +4,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_internet_connection_available">No Internet Connection Available</string>
+    <string name="title">Title</string>
+    <string name="description">Description :</string>
+    <string name="published_at">Published At :</string>
+    <string name="published_at_text">Published At text</string>
+    <string name="author">Author :</string>
+    <string name="author_text">Author text</string>
 </resources>

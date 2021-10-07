@@ -1,5 +1,6 @@
 package com.example.miniproject.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,13 +8,19 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miniproject.R
+import com.example.miniproject.activities.MainActivity
 import com.example.miniproject.adapters.ArticleRecyclerViewAdapter
+import com.example.miniproject.extension.KotlinExtension.ViewExtension.gone
+import com.example.miniproject.extension.KotlinExtension.ViewExtension.visible
 import com.example.miniproject.model.ArticleModel
 import com.example.miniproject.model.SourceModel
+import com.example.miniproject.utils.ViewModelFactory
 import com.example.miniproject.viewModel.ArticleViewModel
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
@@ -25,6 +32,10 @@ class ArticleFragment : Fragment() {
     private var progressBar: ProgressBar? = null
     private var articleRecyclerViewAdapter: ArticleRecyclerViewAdapter? = null
     private var articleRecyclerView: RecyclerView? = null
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -39,10 +50,9 @@ class ArticleFragment : Fragment() {
     }
 
     private fun setUpViewModel() {
-        var articleModels: LiveData<List<ArticleModel?>?>?
-        val articleViewModel = ArticleViewModel(requireActivity().application)
-        articleViewModel.callApiAndSaveInDB(sourceModel!!.id)
-        articleModels = articleViewModel.getArticles(sourceModel!!.id)
+        val articleViewModel = ViewModelProvider(this, viewModelFactory)[ArticleViewModel::class.java]
+        articleViewModel.callApiAndSaveInDB(sourceModel?.id)
+        val articleModels: LiveData<List<ArticleModel?>?>? = articleViewModel.getArticles(sourceModel?.id)
         hideProgressBar()
         articleModels?.observe(this, { sourceModels ->
             articleRecyclerViewAdapter!!.setArticlesList(sourceModels as List<ArticleModel>?)
@@ -51,13 +61,13 @@ class ArticleFragment : Fragment() {
     }
 
     private fun hideProgressBar() {
-        progressBar!!.visibility = View.GONE
-        articleRecyclerView!!.visibility = View.VISIBLE
+        progressBar.gone()
+        articleRecyclerView.visible()
     }
 
     private fun showProgressBar() {
-        progressBar!!.visibility = View.VISIBLE
-        articleRecyclerView!!.visibility = View.GONE
+        progressBar.visible()
+        articleRecyclerView.gone()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -76,6 +86,11 @@ class ArticleFragment : Fragment() {
         if (sourceModel != null) {
             setUpSourcesList()
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as? MainActivity)?.appComponent?.inject(this)
     }
 
     companion object {

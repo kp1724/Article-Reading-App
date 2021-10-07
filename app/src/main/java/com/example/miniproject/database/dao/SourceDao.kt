@@ -7,7 +7,7 @@ import com.example.miniproject.model.SourceModel
 @Dao
 interface SourceDao {
     @Query("SELECT * FROM tblSource")
-    fun loadAllSources(): LiveData<List<SourceModel?>?>?
+    fun loadAllSources(): LiveData<List<SourceModel>?>?
 
     @Query("SELECT * FROM tblSource WHERE id = :id")
     fun getSourceById(id: String?): LiveData<SourceModel?>?

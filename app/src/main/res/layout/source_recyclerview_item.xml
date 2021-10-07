@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/dp_4"
     app:cardCornerRadius="@dimen/dp_16">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/sources_cardview_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,9 +20,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_4"
-            android:text="Source Name"
             android:textSize="@dimen/sp_16"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Source Name" />
 
         <TextView
             android:id="@+id/description"
@@ -29,7 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/source_name"
             android:padding="@dimen/dp_4"
-            android:text="Description :" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/source_name"
+            tools:text="Description :" />
 
         <TextView
             android:id="@+id/category_header"
@@ -37,7 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/description"
             android:padding="4dp"
-            android:text="Category : " />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description"
+            tools:text="Category : " />
 
         <TextView
             android:id="@+id/category"
@@ -46,7 +53,9 @@
             android:layout_below="@id/description"
             android:layout_toEndOf="@id/category_header"
             android:padding="4dp"
-            android:text="Category text" />
+            app:layout_constraintStart_toEndOf="@id/category_header"
+            app:layout_constraintTop_toTopOf="@id/category_header"
+            tools:text="Category text" />
 
         <TextView
             android:id="@+id/country_header"
@@ -54,7 +63,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/category_header"
             android:padding="4dp"
-            android:text="Country : " />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/category_header"
+            tools:text="Country : " />
 
         <TextView
             android:id="@+id/country"
@@ -63,17 +74,21 @@
             android:layout_below="@id/category"
             android:layout_toEndOf="@id/country_header"
             android:padding="4dp"
-            android:text="Country text" />
+            app:layout_constraintStart_toEndOf="@id/country_header"
+            app:layout_constraintTop_toTopOf="@id/country_header"
+            tools:text="Country text" />
 
         <TextView
             android:id="@+id/language_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/category_header"
-            android:layout_marginStart="@dimen/dp_8"
+
             android:layout_toEndOf="@id/country"
             android:padding="4dp"
-            android:text="Language : " />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/country_header"
+            tools:text="Language : " />
 
         <TextView
             android:id="@+id/language"
@@ -82,7 +97,9 @@
             android:layout_below="@id/category"
             android:layout_toEndOf="@id/language_header"
             android:padding="4dp"
-            android:text="Country text" />
-    </RelativeLayout>
+            app:layout_constraintStart_toEndOf="@id/language_header"
+            app:layout_constraintTop_toTopOf="@id/language_header"
+            tools:text="Country text" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

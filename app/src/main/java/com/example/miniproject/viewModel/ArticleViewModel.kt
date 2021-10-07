@@ -1,13 +1,13 @@
 package com.example.miniproject.viewModel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.example.miniproject.model.ArticleModel
 import com.example.miniproject.repository.ArticleRepository
+import javax.inject.Inject
 
-class ArticleViewModel(application: Application) : AndroidViewModel(application) {
-    private val articleRepository: ArticleRepository
+class ArticleViewModel @Inject constructor(private var articleRepository: ArticleRepository) : ViewModel() {
+
     fun callApiAndSaveInDB(sourceId: String?) {
         articleRepository.getArticleListFromWebAndInsertInDB(sourceId)
     }
@@ -16,7 +16,4 @@ class ArticleViewModel(application: Application) : AndroidViewModel(application)
         return articleRepository.getArticleList(id)
     }
 
-    init {
-        articleRepository = ArticleRepository(application)
-    }
 }

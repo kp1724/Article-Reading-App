@@ -1,18 +1,18 @@
 package com.example.miniproject.viewModel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.example.miniproject.model.SourceModel
 import com.example.miniproject.repository.SourceRepository
+import javax.inject.Inject
 
-class SourceViewModel(application: Application) : AndroidViewModel(application) {
-    private val sourceRepository: SourceRepository = SourceRepository(application)
+class SourceViewModel @Inject constructor(private var sourceRepository: SourceRepository) : ViewModel() {
+
     fun callApiAndSaveInDB() {
         sourceRepository.sourceListFromWebAndInsertInDB
     }
 
-    fun getSourceList(): LiveData<List<SourceModel?>?>? {
+    fun getSourceList(): LiveData<List<SourceModel>?>? {
         return sourceRepository.getSourceListFromDb()
     }
 }
