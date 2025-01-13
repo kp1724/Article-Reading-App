@@ -8,11 +8,11 @@ import javax.inject.Inject
 
 class ArticleViewModel @Inject constructor(private var articleRepository: ArticleRepository) : ViewModel() {
 
-    fun callApiAndSaveInDB(sourceId: String?) {
+    fun callApiAndSaveInDB(sourceId: String) {
         articleRepository.getArticleListFromWebAndInsertInDB(sourceId)
     }
 
-    fun getArticles(id: String?): LiveData<List<ArticleModel?>?>? {
+    fun getArticles(id: String): LiveData<List<ArticleModel>> {
         return articleRepository.getArticleList(id)
     }
 

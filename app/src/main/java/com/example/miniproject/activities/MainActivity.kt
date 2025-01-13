@@ -61,10 +61,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         viewModel.callApiAndSaveInDB()
         val sourceModelList = viewModel.getSourceList()
         hideProgressBarAndShowSourceList()
-        sourceModelList?.observe(this, { sourceModels ->
+        sourceModelList.observe(this) { sourceModels ->
             sourceRecyclerViewAdapter?.setSourcesList(sourceModels)
             sourceRecyclerViewAdapter?.notifyDataSetChanged()
-        })
+        }
     }
 
     private fun hideProgressBarAndShowSourceList() {
@@ -119,6 +119,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         fragmentContainer.visible()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         super.onBackPressed()
         if (fragmentContainer.isVisible()) {

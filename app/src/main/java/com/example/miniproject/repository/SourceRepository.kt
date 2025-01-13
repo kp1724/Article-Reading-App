@@ -30,8 +30,10 @@ class SourceRepository @Inject constructor(
                             date.add(Calendar.HOUR_OF_DAY, -1)
                             databaseController.sourceDao()
                                 .deleteAllSources(date.time.time)
-                            databaseController.sourceDao()
-                                .insertAllSources(response.body()?.sources)
+                            response.body()?.sources?.let {
+                                databaseController.sourceDao()
+                                    .insertAllSources(it)
+                            }
                         }
                     }
                 }

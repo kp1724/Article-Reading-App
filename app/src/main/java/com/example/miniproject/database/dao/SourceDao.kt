@@ -7,19 +7,19 @@ import com.example.miniproject.model.SourceModel
 @Dao
 interface SourceDao {
     @Query("SELECT * FROM tblSource")
-    fun loadAllSources(): LiveData<List<SourceModel>?>?
+    fun loadAllSources(): LiveData<List<SourceModel>>
 
     @Query("SELECT * FROM tblSource WHERE id = :id")
-    fun getSourceById(id: String?): LiveData<SourceModel?>?
+    fun getSourceById(id: String?): LiveData<SourceModel?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllSources(sourceModels: List<SourceModel?>?)
+    fun insertAllSources(sourceModels: List<SourceModel>)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateSource(SourceModel: SourceModel?)
+    fun updateSource(sourceModel: SourceModel)
 
     @Delete
-    fun deleteSource(sourceModel: SourceModel?)
+    fun deleteSource(sourceModel: SourceModel)
 
     @Query("DELETE FROM tblSource WHERE createdDateTime < :time")
     fun deleteAllSources(time: Long)

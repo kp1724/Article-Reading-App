@@ -24,8 +24,10 @@ class ArticleRepository @Inject constructor(
                 if (response.body() != null && (response.body()?.status == "ok"))
                     AppExecutors.instance?.diskIO?.execute {
                         databaseController.articleDao().deleteAllArticles()
-                        databaseController.articleDao()
-                            .insertAllArticles(response.body()?.articles)
+                        response.body()?.articles?.let {
+                            databaseController.articleDao()
+                                .insertAllArticles(it)
+                        }
                     }
             }
 
@@ -33,7 +35,7 @@ class ArticleRepository @Inject constructor(
         })
     }
 
-    fun getArticleList(id: String?): LiveData<List<ArticleModel?>?>? {
+    fun getArticleList(id: String): LiveData<List<ArticleModel>> {
         return databaseController.articleDao().getArticle(id)
     }
 }

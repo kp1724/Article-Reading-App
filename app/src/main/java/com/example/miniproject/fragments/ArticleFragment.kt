@@ -51,11 +51,11 @@ class ArticleFragment : Fragment() {
 
     private fun setUpViewModel() {
         val articleViewModel = ViewModelProvider(this, viewModelFactory)[ArticleViewModel::class.java]
-        articleViewModel.callApiAndSaveInDB(sourceModel?.id)
-        val articleModels: LiveData<List<ArticleModel?>?>? = articleViewModel.getArticles(sourceModel?.id)
+        sourceModel?.id?.let { articleViewModel.callApiAndSaveInDB(it) }
+        val articleModels = sourceModel?.id?.let { articleViewModel.getArticles(it) }
         hideProgressBar()
         articleModels?.observe(this, { sourceModels ->
-            articleRecyclerViewAdapter!!.setArticlesList(sourceModels as List<ArticleModel>?)
+            articleRecyclerViewAdapter!!.setArticlesList(sourceModels)
             articleRecyclerViewAdapter!!.notifyDataSetChanged()
         })
     }

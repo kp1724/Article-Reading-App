@@ -12,7 +12,7 @@ class SourceViewModel @Inject constructor(private var sourceRepository: SourceRe
         sourceRepository.sourceListFromWebAndInsertInDB
     }
 
-    fun getSourceList(): LiveData<List<SourceModel>?>? {
+    fun getSourceList(): LiveData<List<SourceModel>> {
         return sourceRepository.getSourceListFromDb()
     }
 }
